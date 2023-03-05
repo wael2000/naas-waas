@@ -1,0 +1,49 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: waas-pipeline
+spec:
+  tasks:
+    - name: provision-workspace
+      params:
+        - name: SCRIPT
+          value: oc apply -f nodejs-workspace.yaml -n $(params.user)-devspaces
+        - name: VERSION
+          value: latest
+      runAfter:
+        - init-pipeline
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+      workspaces:
+        - name: manifest-dir
+          workspace: pipeline-storage
+    - name: init-pipeline
+      params:
+        - name: url
+          value: 'https://github.com/wael2000/naas-waas'
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '1'
+        - name: sslVerify
+          value: 'true'
+        - name: crtFileName
+          value: ca-bundle.crt
+        - name: deleteExisting
+          value: 'true'
+        - name: verbose
+          value: 'true'
+        - name: gitInitImage
+          value: >-
+            registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:a538c423e7a11aae6ae582a411fdb090936458075f99af4ce5add038bb6983e8
+        - name: userHome
+          value: /tekton/home
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: pipeline-storage
+  workspaces:
+    - name: pipeline-storage
