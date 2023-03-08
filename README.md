@@ -11,18 +11,19 @@ Developer Experience (DX) refers to the experience of developers as they work wi
 - Namespace configuration operator
 
 ###  The demo use case covers the following scenario:
-1 - A new developer is joining the team
-2 - With the first log-in a new namespace is created with the following
-- Standard name <USER>-devspaces
-- Quota and limits
-- RBAC granting the pipeline service account in team CICD namespace ‘admin’ access to the developer <USER>-devspaces
-- Add an onboarding workspace containing all the onboarding documentation required by the new developer
-- Force the onboarding workspace to be running all the time
-3 - Developers can not 
-- delete the namespace
-- delete or stop the onboarding-workspace
-4 - Developer request to access a NodeJS workspace to start NodeJS+MongoDB development
-5 - Platform team runs the WaaS pipeline that creates the NodeJS workspace in the developer namespace <USER>-devspaces
+.
+├── A new developer is joining the team
+├── With the first log-in a new namespace is created with the following
+│   ├── Standard name <USER>-devspaces
+│   ├── Quota and limits
+│   ├── RBAC granting the pipeline service account in team CICD namespace ‘admin’ access to the developer <USER>-devspaces
+│   ├── Add an onboarding workspace containing all the onboarding documentation required by the new developer
+│   └── Force the onboarding workspace to be running all the time
+├── Developers can not 
+│   ├── delete the namespace
+│   └── delete or stop the onboarding-workspace
+├── Developer request to access a NodeJS workspace to start NodeJS+MongoDB development
+└── Platform team runs the WaaS pipeline that creates the NodeJS workspace in the developer namespace <USER>-devspaces
 
 ### Objects used 
 - NamespaceConfig from Namespace configuration operator
