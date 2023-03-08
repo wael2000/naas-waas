@@ -11,6 +11,7 @@ Developer Experience (DX) refers to the experience of developers as they work wi
 - Namespace configuration operator
 
 ###  The demo use case covers the following scenario:
+```bash
 .
 ├── A new developer is joining the team.
 ├── With the first log-in a new namespace is created with the following.
@@ -24,6 +25,7 @@ Developer Experience (DX) refers to the experience of developers as they work wi
 │   └── delete or stop the onboarding-workspace
 ├── Developer request to access a NodeJS workspace to start NodeJS+MongoDB development
 └── Platform team runs the WaaS pipeline that creates the NodeJS workspace in the developer namespace <USER>-devspaces
+```
 
 ### Objects used 
 - NamespaceConfig from Namespace configuration operator
