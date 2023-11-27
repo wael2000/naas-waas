@@ -1,0 +1,27 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: waas-trigger-template
+spec:
+  params:
+    - name: user
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: waas-pipeline-
+        labels:
+          tekton.dev/pipeline: waas-pipeline
+        namespace: demo-cicd
+      spec:
+        params:
+          - name: user
+            value: $(tt.params.user)
+        pipelineRef:
+          name: waas-pipeline
+        resources: []
+        status: null
+        workspaces:
+          - name: pipeline-storage
+            persistentVolumeClaim:
+              claimName: bubble-pvc
